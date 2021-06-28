@@ -1,37 +1,43 @@
 <?php
-// session_start();
-// $_SESSION['message'] = "Crea un nuovo Utente!";
 require_once 'functions.php';
 require_once 'view/header.php';
 ?>
 <header>
-    <div class="wrapper">
-            <div class="container-fluid">
+    <div class="centerPos">
+            <div class="containerCenter">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="page-header">
-                            <h2>Ciao  <?php
+                            <h1><?php
                               $users = getUsers();
+                              if (!$users) { ?>
+                              <h1>Ciao Guest,</h1>
+                                  <h2>Registrati per sapere quanti giorni mancano al tuo compleanno!</h2>
+                                  <?php
+                              }
                               $dates = takeDate();
                               require 'userList.php';
-                              require 'dateList.php'; ?>
-                            </h2>
+                               ?>
+                              
+                            </h1>
                         </div>
-                        
-                        <form action="insert.php" method="post">
-                            <div class="form-group">
+                        <form method="POST" action="insert.php/">
+                        <div class="form-group">
                                 <label>Nome</label>
-                                <input type="text" name="username" class="form-control" autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label>Data di nascita</label>
-                                <input type="date" name="date" class="form-control">
-                            </div>
-                            <input id="submitBtn" type="submit" class="btn btn-primary" name="submit">
+                                <input type="text" name="username" class="form-control" autocomplete="off" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Inserisci data nascita</label>
+                            <input class="dataInput" name="data" type="date" required>
+                        </div>
+                        <div class="containerBtn">
+                            <button  id="submitBtn" type="submit" class="rowBtn" name="submit">Registrati</button>
                         </form>
-                            <form action="functions.php" method="post">
-                            <button id="deleteBtn" name="azione" type="submit">DELETE</button>
-                            </form>
+                        <form action="functions.php" method="post">
+                            <button class="rowBtn" id="deleteBtn" name="azione" type="submit">Elimina utente</button>
+                        </form>
+                        </div>
+                       </form>
                     </div>
                 </div>        
             </div>

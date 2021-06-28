@@ -1,0 +1,57 @@
+
+h1,h2 {
+    margin: 5px;
+}
+
+h1 {
+    font-size: 32px;
+    font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+    font-size: 24px;
+    font-family: 'Roboto', sans-serif;
+}
+
+label {
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    padding: 10px;
+}
+
+.centerPos {
+    display: flex;
+    justify-content: center;
+}
+
+.containerCenter {
+    padding: 20px;
+    justify-content: center;
+    text-align: center;
+}
+
+.form-group {    
+    text-align: center;
+}
+.containerBtn {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+.rowBtn {
+    background: rgb(139, 139, 255);
+    padding: 8px;
+    margin: 20px;
+    color: white;
+    font-family: 'Roboto';
+}
+
+.rowBtn:hover {
+    background: white;
+    transition: 0.5s;
+    color: rgb(56, 56, 56);
+}
+
+.dataInput {
+    font-family: 'Roboto';
+}
