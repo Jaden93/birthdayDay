@@ -1,6 +1,4 @@
 <?php
-// session_start();
-// $_SESSION['message'] = "Crea un nuovo Utente!";
 require_once 'functions.php';
 require_once 'view/header.php';
 ?>
@@ -12,9 +10,9 @@ require_once 'view/header.php';
                         <div class="page-header">
                             <h2>Ciao  <?php
                               $users = getUsers();
-                              $dates = takeDate();
+                              $date = takeDate();
                               require 'userList.php';
-                              require 'dateList.php'; ?>
+                              ?>
                             </h2>
                         </div>
                         

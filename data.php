@@ -1,94 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>
 <?php
-$today = date("j F");   // March 10, 2001, 5:16 pm
-echo "OGGI.$today";
+require_once 'functions.php';
+require_once 'view/header.php';
 ?>
-<form method="GET" action="">
-    <label for="">Inserisci data nascita</label>
-    <input name="data" type="date" required>
-     <button type="submit">INVIA</button>
-</form>
-</h1>
-<?php 
 
-$mesi = json_decode(file_get_contents("months2.json"), true);
-
-$days = 0;
-//28 giorno
-$giorno= date('d');
-//06 mese
-$month = date('m');
-$mesee = trim($month,0);
-$totalCurrentDays = 0;
-$totalLeftDays = 0;
-forEach($mesi as $mese => $value) {
-    if ($value["number"] <= $mesee){
-        $totalCurrentDays += $value["days"];
-    };
-    if ($value["number"] == $mesee) {
-        $daysLeft =  $value["days"] - $giorno."\n";
-    }
-}
-$totalCurrentDays = $totalCurrentDays - $daysLeft; 
-if (isset($_GET['data'])) { ?>
-    <?php $date = $_GET['data']; ?>
-    <?php 
-    $date = explode("-", $date);
-    foreach($mesi as $mese => $value) {
-        
-        $days += $value["days"];
-        $month = $value["number"];
-        $year = 365;
-        if ($month == $date[1]) { ?>
-        <h1> <?php
-
-            $fineMese =  $days - $date[2];
-            $giorniMancanti =  $days - $fineMese;
-            //Giorni da inizio anno a compleanno
-             $dayPast =  $days - $value["days"] + $giorniMancanti;
-            //Giorno odierno
-             $totalDayleft = $dayPast - $totalCurrentDays;
-            
-            if ($totalDayleft == 0) {
-                echo "Oggi è il tuo compleanno, Auguri!";
-            }
-            elseif ($totalDayleft == 1) {
-                echo "Domani è il tuo compleanno!";
-            }
-            elseif ($totalDayleft > 1) {
-                echo "Mancano"." ".$totalDayleft." giorni al tuo compleanno! Cadrà di ".$value["name"];
-            }
-
-            else {
-
-                    foreach($mesi as $mese => $value) {
-                       if ($value["number"] > $mesee) {
-                        $totalLeftDays += $value["days"];
+<header>
+    <div class="wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="page-header">
+                            <h2>Ciao  <?php
+                              $users = getUsers();
+                              $date = getDate();
+                              require 'userList.php';?>
+                            </h2>
+                        </div>
                         
-                       } elseif ($value["number"] == $month) {
-                          $monthBirthday =  $value["name"];
-                       }
+                        <form action="insert.php" method="post">
+                            <div class="form-group">
+                                <label>Nome</label>
+                                <input type="text" name="username" class="form-control" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label>Data di nascita</label>
+                                <input type="date" name="date" class="form-control">
+                            </div>
+                            <input id="submitBtn" type="submit" class="btn btn-primary" name="submit">
+                        </form>
+                            <form action="functions.php" method="post">
+                            <button id="deleteBtn" name="azione" type="submit">DELETE</button>
+                            </form>
+                    </div>
+                </div>        
+            </div>
+    </div>
+</header>
 
-                    }
-                    $dayLastBirthday =  $totalLeftDays + $dayPast;
-                    echo "Mancano ".$dayLastBirthday + 2 ." al tuo compleanno! Cadrà di ".$monthBirthday;
-            }
-        ?>
-        </h1>
-    <?php } 
-}
-  ?>
-<?php
-}
-?>
 </body>
 </html>
